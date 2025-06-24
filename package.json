@@ -1,0 +1,30 @@
+{
+  "name": "web-stl-browser",
+  "version": "1.0.0",
+  "description": "web server for stls",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IceManSweden/web-stl-browser.git"
+  },
+  "keywords": [
+    "stl"
+  ],
+  "author": "Erik Larsson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IceManSweden/web-stl-browser/issues"
+  },
+  "homepage": "https://github.com/IceManSweden/web-stl-browser#readme",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "mongoose": "^8.16.0",
+    "morgan": "^1.10.0"
+  }
+}
