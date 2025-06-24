@@ -13,7 +13,7 @@ app.use(morgan('dev'));
 app.use(express.static('public'));
 
 app.use('/images', express.static(process.env.MOUNT_DIR_IMAGES));
-app.use('/files', express.static(process.env.MOUNT_DIR_FILES));
+//app.use('/files', express.static(process.env.MOUNT_DIR_FILES));
 
 app.get('/', (req, res) => {
     res.render('index');
@@ -28,12 +28,41 @@ app.listen(process.env.PORT, () => {
 
     console.log(`Mounted dirs ${process.env.MOUNT_DIR_IMAGES}`);
     console.log(`Mounted dirs ${process.env.MOUNT_DIR_FILES}`);
+    validateFiles()
+})
 
+function validateFiles(){
     if(fs.lstatSync(process.env.MOUNT_DIR_FILES).isDirectory() && fs.lstatSync(process.env.MOUNT_DIR_IMAGES).isDirectory()) {
         console.log("Directory exists");
+        //Count files. Look for matching images.
+        const files = fs.readdirSync(process.env.MOUNT_DIR_FILES).sort();
+        const images = fs.readdirSync(process.env.MOUNT_DIR_IMAGES).sort();
+        //Look for missing images.
+        console.log("Found models", files.length);
+        console.log("Found images", images.length);
+        const missing = []
+        for (let i = 0; i < files.length; i++) {
+            let found = false;
+            let im;
+            for (let j = 0; j < images.length; j++) {
+                if (files[i].split('.st')[0] === images[j].split('.pn')[0]) {
+                    found = true;
+                    im = j;
+                    break;
+                }
+            }
+            if (!found) {
+                missing.push(files[i]);
+            }
+            else{
+                images.splice(im, 1);
+            }
+        }
+        console.log(missing);
+
     }
     else{
         console.log("Invalid directory");
     }
 
-})
+}
