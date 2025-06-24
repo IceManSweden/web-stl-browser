@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import mongoose from 'mongoose';
 import ejs from 'ejs';
 import dotenv from 'dotenv';
+import fs from 'fs';
 dotenv.config();
 
 const app = express();
@@ -24,7 +25,15 @@ app.get('/download', (req, res) => {
 
 app.listen(process.env.PORT, () => {
     console.log(`Listening on port ${process.env.PORT}`);
-    console.log(`Mounted dirs ${process.env.MOUNT_DIR_IMAGES}`);
 
+    console.log(`Mounted dirs ${process.env.MOUNT_DIR_IMAGES}`);
     console.log(`Mounted dirs ${process.env.MOUNT_DIR_FILES}`);
+
+    if(fs.lstatSync(process.env.MOUNT_DIR_FILES).isDirectory() && fs.lstatSync(process.env.MOUNT_DIR_IMAGES).isDirectory()) {
+        console.log("Directory exists");
+    }
+    else{
+        console.log("Invalid directory");
+    }
+
 })
