@@ -41,12 +41,18 @@ function validateFiles(){
         console.log("Found models", files.length);
         console.log("Found images", images.length);
         const missing = []
+        const link = []
         for (let i = 0; i < files.length; i++) {
             let found = false;
             let im;
             for (let j = 0; j < images.length; j++) {
                 if (files[i].split('.st')[0] === images[j].split('.pn')[0]) {
                     found = true;
+                    const obj = {
+                        file: files[i],
+                        image: images[j],
+                    }
+                    link.push(obj)
                     im = j;
                     break;
                 }
@@ -59,6 +65,8 @@ function validateFiles(){
             }
         }
         console.log(missing);
+        console.log(images);
+        console.log(link)
 
     }
     else{
