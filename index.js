@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import fs from 'fs';
 import fileModel from "./src/model/fileModel.js";
-
+import modelRoute from './src/route/modelRoute.js';
 dotenv.config();
 
 await mongoose.connect(process.env.DB_CONNECTION);
@@ -17,6 +17,8 @@ app.use(express.static('public'));
 
 app.use('/images', express.static(process.env.MOUNT_DIR_IMAGES));
 //app.use('/files', express.static(process.env.MOUNT_DIR_FILES));
+
+app.use('/models', modelRoute);
 
 app.get('/', async (req, res) => {
     res.render('index', {models: await fileModel.getAll()});

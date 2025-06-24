@@ -28,3 +28,7 @@ FileModel.findByName = async (name) => {
 FileModel.getAll = async () => {
     return File.find();
 }
+
+FileModel.findById = async (id)=>{
+    return File.findById(id)
+}
