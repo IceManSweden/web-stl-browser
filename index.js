@@ -18,8 +18,8 @@ app.use(express.static('public'));
 app.use('/images', express.static(process.env.MOUNT_DIR_IMAGES));
 //app.use('/files', express.static(process.env.MOUNT_DIR_FILES));
 
-app.get('/', (req, res) => {
-    res.render('index');
+app.get('/', async (req, res) => {
+    res.render('index', {models: await fileModel.getAll()});
 })
 
 app.get('/download', (req, res) => {

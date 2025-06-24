@@ -1,5 +1,7 @@
 <div class="card">
-    <h3>title</h3>
-    <img src="/images/Abd_rb.png" alt="">
-    <a href="" class="button">View</a>
+    <img src="images/<%= model.imagePath %>" alt="model image" class="card-image-top" loading="lazy">
+    <div class="card-body">
+        <h5 class="card-title"><%= model.name %></h5>
+        <a href="images/<%= model.imagePath %>" class="btn btn-primary">View</a>
+    </div>
 </div>

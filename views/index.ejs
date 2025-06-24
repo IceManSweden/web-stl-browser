@@ -2,39 +2,15 @@
 <body>
 <h1>Stl browser</h1>
 <div class="container">
-    <div class="row">
-        <div class="col-sm">
-            <%- include('cardModel') -%>
+    <% for (var i = 0; i < models.length ;i+=5){ %>
+        <div class="row m-2">
+            <% for (var j = i; j < i+5 ;j++){ %>
+                <div class="col-sm" style="width: 18%">
+                    <%- include('cardModel', {model: models[j]}); %>
+                </div>
+            <% } %>
         </div>
-        <div class="col-sm">
-            <%- include('cardModel') -%>
-        </div>
-        <div class="col-sm">
-            <%- include('cardModel') -%>
-        </div>
-        <div class="col-sm">
-            <%- include('cardModel') -%>
-        </div>
-        <div class="col-sm">
-            <%- include('cardModel') -%>
-        </div>
-    </div>    <div class="row">
-        <div class="col-sm">
-            <%- include('cardModel') -%>
-        </div>
-        <div class="col-sm">
-            <%- include('cardModel') -%>
-        </div>
-        <div class="col-sm">
-            <%- include('cardModel') -%>
-        </div>
-        <div class="col-sm">
-            <%- include('cardModel') -%>
-        </div>
-        <div class="col-sm">
-            <%- include('cardModel') -%>
-        </div>
-    </div>
+    <% } %>
 
 </div>
 </body>
