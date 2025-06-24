@@ -9,6 +9,10 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(morgan('dev'));
+app.use(express.static('public'));
+
+app.use('/images', express.static(process.env.MOUNT_DIR_IMAGES));
+app.use('/files', express.static(process.env.MOUNT_DIR_FILES));
 
 app.get('/', (req, res) => {
     res.render('index');
@@ -20,4 +24,7 @@ app.get('/download', (req, res) => {
 
 app.listen(process.env.PORT, () => {
     console.log(`Listening on port ${process.env.PORT}`);
+    console.log(`Mounted dirs ${process.env.MOUNT_DIR_IMAGES}`);
+
+    console.log(`Mounted dirs ${process.env.MOUNT_DIR_FILES}`);
 })
