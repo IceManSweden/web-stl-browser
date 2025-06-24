@@ -13,6 +13,6 @@ controller.getById = async (req, res) => {
 controller.download = async (req, res) => {
     const modelId = req.params.id;
     const modelInfo = await fileModel.findById(modelId);
-    const path = "../files/" + modelInfo.filePath;
+    const path = "./files/models/" + modelInfo.filePath;
     res.download(path);
 }

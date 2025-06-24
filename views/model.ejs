@@ -1,4 +1,6 @@
 <%- include('header') -%>
 <div class="container">
     <h1><%= model.name%></h1>
+    <img src="../images/<%=model.imagePath%>" alt="">
+    <a href="./download/<%=model.id%>" class="btn btn-primary">Download</a>
 </div>

@@ -5,4 +5,4 @@ const router = express.Router();
 
 export default router;
 router.get('/:id', modelController.getById);
-router.get('/:id/download', modelController.download);
+router.get('/download/:id', modelController.download);
