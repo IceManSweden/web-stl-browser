@@ -1,10 +1,13 @@
 import express from 'express';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
-import ejs from 'ejs';
 import dotenv from 'dotenv';
 import fs from 'fs';
+import fileModel from "./src/model/fileModel.js";
+
 dotenv.config();
+
+await mongoose.connect(process.env.DB_CONNECTION);
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -31,8 +34,8 @@ app.listen(process.env.PORT, () => {
     validateFiles()
 })
 
-function validateFiles(){
-    if(fs.lstatSync(process.env.MOUNT_DIR_FILES).isDirectory() && fs.lstatSync(process.env.MOUNT_DIR_IMAGES).isDirectory()) {
+async function validateFiles() {
+    if (fs.lstatSync(process.env.MOUNT_DIR_FILES).isDirectory() && fs.lstatSync(process.env.MOUNT_DIR_IMAGES).isDirectory()) {
         console.log("Directory exists");
         //Count files. Look for matching images.
         const files = fs.readdirSync(process.env.MOUNT_DIR_FILES).sort();
@@ -49,8 +52,7 @@ function validateFiles(){
                 if (files[i].split('.st')[0] === images[j].split('.pn')[0]) {
                     found = true;
                     const obj = {
-                        file: files[i],
-                        image: images[j],
+                        name: files[i].split('.')[0], filePath: files[i], imagePath: images[j],
                     }
                     link.push(obj)
                     im = j;
@@ -59,18 +61,22 @@ function validateFiles(){
             }
             if (!found) {
                 missing.push(files[i]);
-            }
-            else{
+            } else {
                 images.splice(im, 1);
             }
         }
-        console.log(missing);
-        console.log(images);
-        console.log(link)
-
-    }
-    else{
+        if (!missing) {
+            console.log(missing);
+        }
+        const db = await fileModel.getAll()
+        if (db.length === link.length) {
+            console.log("All files found in DB by Count");
+        } else { // Adds the files to the db if they don't exist.
+            link.forEach(link => {
+                fileModel.create(link.name, link.filePath, link.imagePath)
+            })
+        }
+    } else {
         console.log("Invalid directory");
     }
-
 }
