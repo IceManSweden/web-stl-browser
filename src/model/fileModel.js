@@ -15,6 +15,7 @@ export default FileModel;
  * Creates a new model.
  * @param name The models name
  * @param filePath the path for the model.
+ *
  * @param imagePath the path for the image.
  * @returns Object if it was successful
  */
