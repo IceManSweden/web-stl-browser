@@ -4,6 +4,7 @@ const schema = new mongoose.Schema({
     name: {type: String, required: true, unique: true},
     filePath: {type: String, required: true, unique: true},
     imagePath: {type: String, required: true, unique: true},
+    category: {type: [String]},
 })
 
 const File = new mongoose.model("File", schema);
@@ -42,6 +43,14 @@ FileModel.findByName = async (name) => {
  */
 FileModel.getAll = async () => {
     return File.find();
+}
+
+FileModel.addCategory = async (fileId, category) => {
+    const f = new File.findById(fileId);
+    f.category = category;
+    return await f.save().catch((err) => {
+        return false
+    })
 }
 /**
  * Finds and get the model info by id.

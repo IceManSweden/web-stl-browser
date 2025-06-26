@@ -16,3 +16,10 @@ controller.download = async (req, res) => {
     const path = "./files/models/" + modelInfo.filePath;
     res.download(path);
 }
+
+controller.addCategory = async (req, res) => {
+    const modelId = req.params.id;
+    const category = req.body.category;
+    await fileModel.addCategory(modelId, category.trim().split(','));
+    res.redirect('/models/' + modelId);
+}
