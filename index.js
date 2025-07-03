@@ -14,7 +14,7 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'));
 
 app.use('/images', express.static(process.env.MOUNT_DIR_IMAGES));
@@ -30,12 +30,13 @@ app.get('/download', (req, res) => {
     res.download('./public/css/style.css');
 })
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT, async () => {
+    console.log('Server Starting...')
     console.log(`Listening on port ${process.env.PORT}`);
-
     console.log(`Mounted dirs ${process.env.MOUNT_DIR_IMAGES}`);
     console.log(`Mounted dirs ${process.env.MOUNT_DIR_FILES}`);
-    validateFiles()
+    await validateFiles()
+    console.log('Server is Running...')
 })
 
 async function validateFiles() {

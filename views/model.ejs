@@ -3,10 +3,10 @@
     <h1><%= model.name%></h1>
     <img src="../images/<%=model.imagePath%>" alt="">
     <a href="./download/<%=model.id%>" class="btn btn-primary">Download</a>
-    <%if(model.categories){%>
+    <%if(model.category){%>
     <ul class="categories row list-group" id="categories">
-        <%for(var i = 0; i < model.categories.length; i++){%>
-            <li class="col list-group-item"><a href="">Test</a></li>
+        <%for(var i = 0; i < model.category.length; i++){%>
+            <li class="col list-group-item"><a href=""><%=model.category[i]%></a></li>
         <%}%>
     </ul>
     <%}%>
@@ -24,7 +24,7 @@
                     <form method="POST" action="/models/<%=model.id%>/category" id="category-form">
                         <div class="form-group">
                             <label for="newCat" class="col-form-label">Add Category</label>
-                            <input type="text" class="form-control" id="newCat">
+                            <input type="text" class="form-control" id="newCat" name="category" placeholder="Enter new category">
                         </div>
                     </form>
                 </div>

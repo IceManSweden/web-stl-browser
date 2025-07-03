@@ -20,7 +20,7 @@ controller.download = async (req, res) => {
 controller.addCategory = async (req, res) => {
     const modelId = req.params.id;
     const category = req.body.category;
-    console.log(category);
+    console.log("id: ", modelId, " Body: ",req.body);
     await fileModel.addCategory(modelId, category);
     res.redirect('/models/' + modelId);
 }

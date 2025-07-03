@@ -47,11 +47,7 @@ FileModel.getAll = async () => {
 
 FileModel.addCategory = async (fileId, category) => {
     console.log(fileId, category)
-    const f = File.findOne({name: fileId, filePath: fileId});
-    f.category.push(category);
-    return await f.save().catch((err) => {
-        return false
-    })
+    return File.updateOne({_id: fileId}, {$push: {category: category}});
 }
 /**
  * Finds and get the model info by id.
