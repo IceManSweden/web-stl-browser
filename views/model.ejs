@@ -3,14 +3,13 @@
     <h1><%= model.name%></h1>
     <img src="../images/<%=model.imagePath%>" alt="">
     <a href="./download/<%=model.id%>" class="btn btn-primary">Download</a>
+    <%if(model.categories){%>
     <ul class="categories row list-group" id="categories">
-
-        <li class="col list-group-item"><a href="">Test</a></li>
-        <li class="col list-group-item">Test</li>
-        <li class="col list-group-item">Test</li>
-        <li class="col list-group-item">Test</li>
-        <li class="col list-group-item">Test</li>
+        <%for(var i = 0; i < model.categories.length; i++){%>
+            <li class="col list-group-item"><a href="">Test</a></li>
+        <%}%>
     </ul>
+    <%}%>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="">Add Category</button>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -22,7 +21,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form method="POST" action="/models/<%=model.id%>/category" id="category-form">
                         <div class="form-group">
                             <label for="newCat" class="col-form-label">Add Category</label>
                             <input type="text" class="form-control" id="newCat">
@@ -31,7 +30,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Add</button>
+                    <button type="submit" class="btn btn-primary" form="category-form">Add</button>
                 </div>
             </div>
         </div>

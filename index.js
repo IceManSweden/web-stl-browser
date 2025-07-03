@@ -1,6 +1,7 @@
 import express from 'express';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import fs from 'fs';
 import fileModel from "./src/model/fileModel.js";
@@ -13,6 +14,7 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 app.use('/images', express.static(process.env.MOUNT_DIR_IMAGES));

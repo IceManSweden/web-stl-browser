@@ -46,8 +46,9 @@ FileModel.getAll = async () => {
 }
 
 FileModel.addCategory = async (fileId, category) => {
-    const f = new File.findById(fileId);
-    f.category = category;
+    console.log(fileId, category)
+    const f = File.findOne({name: fileId, filePath: fileId});
+    f.category.push(category);
     return await f.save().catch((err) => {
         return false
     })
