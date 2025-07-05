@@ -23,7 +23,6 @@ app.use('/images', express.static(process.env.MOUNT_DIR_IMAGES));
 app.use('/models', modelRoute);
 
 app.get('/', async (req, res) => {
-    console.log(req.query.q);
     if(req.query.q === '' || !req.query.q){
         return res.render('index', {models: await fileModel.getAll()});
     }

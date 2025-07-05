@@ -59,7 +59,7 @@ FileModel.findById = async (id)=>{
 }
 
 FileModel.search = async (query) => {
-    const models = await File.find({$text: {$search: query}});
+    const models = await File.find({name:{$regex: new RegExp(query, 'i')}});
     console.log(models);
     return models;
 }
