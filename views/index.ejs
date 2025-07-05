@@ -2,25 +2,16 @@
 <%- include('navbar') -%>
 <body>
 <div class="container">
-        <p>Found: <%=models.length%></p>
-        <%if(models.length <= 999){%>
-                <div class="row m-2">
-                        <% for (var j = 0; j < models.length  ;j++){ %>
-                                <div class="col-sm-20" style="width: 18%">
-                                        <%- include('cardModel', {model: models[j]}); %>
-                                </div>
-                        <% } %>
-                </div>
-        <%} else {%>
-    <% for (var i = 0; i < models.length ;i+=5){ %>
+    <p>Found: <%=models.length%></p>
+    <%if(models.length <= 999){%>
         <div class="row m-2">
-            <% for (var j = i; j < i+5 ;j++){ %>
-                <div class="col-sm" style="width: 18%">
+            <% for (var j = 0; j < models.length  ;j++){ %>
+                <div class="col-sm-20" style="width: 18%">
                     <%- include('cardModel', {model: models[j]}); %>
                 </div>
             <% } %>
         </div>
-    <% } }%>
+    <%}%>
 
 </div>
 </body>
