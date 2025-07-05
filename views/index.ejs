@@ -4,13 +4,17 @@
 <div class="container">
     <p>Found: <%=models.length%></p>
     <%if(models.length <= 999){%>
+            <% for (var i = 0; i < models.length;i+=5){ %>
         <div class="row m-2">
-            <% for (var j = 0; j < models.length  ;j++){ %>
-                <div class="col-sm-20" style="width: 18%">
-                    <%- include('cardModel', {model: models[j]}); %>
+                <% let c = 5%>
+                <%if (c + 5 > models.length){ c = models.length - i}%>
+                <% for(var j = i; j < i + c; j++){ %>
+                <div class="col-sm-20 m-2" style="width: 18%">
+                    <%- include('cardModel', {model: models[i]}); %>
                 </div>
-            <% } %>
+                <%}%>
         </div>
+            <% } %>
     <%}%>
 
 </div>
