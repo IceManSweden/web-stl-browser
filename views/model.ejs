@@ -1,43 +1,62 @@
 <%- include('header') -%>
-<div class="container" id="main">
-    <h1><%= model.name%></h1>
-    <img src="../images/<%=model.imagePath%>" alt="">
-    <a href="./download/<%=model.id%>" class="btn btn-primary">Download</a>
-    <%if(model.category){%>
-    <ul class="categories row list-group" id="categories">
-        <%for(var i = 0; i < model.category.length; i++){%>
-            <li class="col list-group-item"><a href="/tag/<%=model.category[i]%>"><%=model.category[i]%></a></li>
-        <%}%>
-    </ul>
-    <%}%>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="">Add Category</button>
+<%- include('navbar') -%>
+
+<div class="container my-5" id="main">
+    <h1 class="mb-4 text-center"><%= model.name %></h1>
+
+    <div class="text-center mb-4">
+        <img src="../images/<%= model.imagePath %>" alt="<%= model.name %>" class="img-fluid rounded shadow-sm">
+    </div>
+
+    <div class="text-center mb-4">
+        <a href="./download/<%= model.id %>" class="btn btn-primary btn-lg">Download</a>
+    </div>
+
+    <% if (model.category && model.category.length > 0) { %>
+        <h4 class="mb-3">Categories:</h4>
+        <ul class="list-group list-group-horizontal flex-wrap mb-4">
+            <% model.category.forEach(function(cat) { %>
+                <li class="list-group-item border-0 px-2">
+                    <a href="/tag/<%= cat %>" class="badge badge-pill badge-info py-2 px-3"><%= cat %></a>
+                </li>
+            <% }); %>
+        </ul>
+    <% } %>
+
+    <div class="text-center mb-4">
+        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
+            Add Category
+        </button>
+    </div>
+
+    <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Category</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form method="POST" action="/models/<%=model.id%>/category" id="category-form">
+                <form method="POST" action="/models/<%= model.id %>/category" id="category-form">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Category</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
                         <div class="form-group">
-                            <label for="newCat" class="col-form-label">Add Category</label>
+                            <label for="newCat">New Category</label>
                             <input type="text" class="form-control" id="newCat" name="category" placeholder="Enter new category">
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" form="category-form">Add</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-
 </div>
+
 <script src="../js/addCategory.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
