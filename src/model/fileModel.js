@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
 const schema = new mongoose.Schema({
-    name: {type: String, required: true, unique: true},
+    name: {type: String, required: true, unique: true, text: true},
     filePath: {type: String, required: true, unique: true},
     imagePath: {type: String, required: true, unique: true},
-    category: {type: [String]},
+    category: {type: [String] ,text: true},
 })
 
 const File = new mongoose.model("File", schema);
@@ -56,4 +56,10 @@ FileModel.addCategory = async (fileId, category) => {
  */
 FileModel.findById = async (id)=>{
     return File.findById(id)
+}
+
+FileModel.search = async (query) => {
+    const models = await File.find({$text: {$search: query}});
+    console.log(models);
+    return models;
 }

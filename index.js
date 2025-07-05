@@ -23,11 +23,13 @@ app.use('/images', express.static(process.env.MOUNT_DIR_IMAGES));
 app.use('/models', modelRoute);
 
 app.get('/', async (req, res) => {
-    res.render('index', {models: await fileModel.getAll()});
-})
-
-app.get('/download', (req, res) => {
-    res.download('./public/css/style.css');
+    console.log(req.query.q);
+    if(req.query.q === '' || !req.query.q){
+        return res.render('index', {models: await fileModel.getAll()});
+    }
+    console.log("Searching for:", req.query.q);
+    const models = await fileModel.search(req.query.q);
+    res.render('index', {models: models });
 })
 
 app.listen(process.env.PORT, async () => {
