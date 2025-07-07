@@ -10,7 +10,7 @@
                 <%if (c + 5 > models.length){ c = models.length - i}%>
                 <% for(var j = i; j < i + c; j++){ %>
                 <div class="col-sm-20 m-2" style="width: 18%">
-                    <%- include('cardModel', {model: models[i]}); %>
+                    <%- include('cardModel', {model: models[j]}); %>
                 </div>
                 <%}%>
         </div>
