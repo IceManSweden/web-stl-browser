@@ -1,4 +1,5 @@
 import fileModel from "../model/fileModel.js";
+import fs from 'fs';
 
 const controller = {}
 export default controller;
@@ -38,10 +39,14 @@ controller.addNewModel = (req, res) => {
     let sampleFile = req.files.foo;
 
     // Use the mv() method to place the file somewhere on your server
-    sampleFile.mv('/home/ice/Development/web-stl-browser/Files/temp/', function(err) {
+    fs.appendFile('Files/temp/'+ sampleFile.name, sampleFile.data, (err) => {
+        return res.status(400).send(err.message);
+    });
+   /** sampleFile.mv('Files/temp', function(err) {
         if (err)
             return res.status(500).send(err);
 
         res.send('File uploaded!');
-    });
+    });**/
+   res.send('Files added successfully.');
 }
