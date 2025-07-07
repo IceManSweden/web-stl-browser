@@ -2,8 +2,8 @@
 <%- include('navbar')-%>
 <body>
 
-<form action="models/upload" method="POST">
-    <input type="file" accept="model/stl" id="filePicker" name="chosenFile">
+<form action="/models/upload" method="POST" enctype="multipart/form-data">
+    <input type="file" accept=".stl" id="filePicker" name="foo" >
     <input type="submit" value="Submit" class="btn btn-primary">
 </form>
 </body>

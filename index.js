@@ -19,7 +19,8 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'));
 app.use(fileUpload({
-    limits:{ fileSize: 50* 1024 * 1024 },
+    limits:{ fileSize: 50 * 1024 * 1024 * 1024},
+    debug: true
 }))
 
 app.use('/images', express.static(process.env.MOUNT_DIR_IMAGES));
