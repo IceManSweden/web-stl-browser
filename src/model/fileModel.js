@@ -63,3 +63,7 @@ FileModel.search = async (query) => {
     console.log(models);
     return models;
 }
+
+FileModel.uploadNewModel = async (fileId, filePath, imagePath) => {
+
+}

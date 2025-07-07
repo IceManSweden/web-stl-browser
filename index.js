@@ -2,10 +2,12 @@ import express from 'express';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
+import fileUpload from 'express-fileupload';
 import dotenv from 'dotenv';
 import fs from 'fs';
 import fileModel from "./src/model/fileModel.js";
 import modelRoute from './src/route/modelRoute.js';
+
 dotenv.config();
 
 await mongoose.connect(process.env.DB_CONNECTION);
@@ -16,6 +18,9 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'));
+app.use(fileUpload({
+    limits:{ fileSize: 50* 1024 * 1024 },
+}))
 
 app.use('/images', express.static(process.env.MOUNT_DIR_IMAGES));
 //app.use('/files', express.static(process.env.MOUNT_DIR_FILES));

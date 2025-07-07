@@ -24,3 +24,12 @@ controller.addCategory = async (req, res) => {
     await fileModel.addCategory(modelId, category);
     res.redirect('/models/' + modelId);
 }
+
+controller.addModelSite = async (req, res) => {
+    res.render('upload')
+}
+
+controller.addNewModel = async (req, res) => {
+    console.log(req.files.chosenFile);
+    res.redirect('/');
+}
